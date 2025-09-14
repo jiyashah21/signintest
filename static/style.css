@@ -1,0 +1,469 @@
+
+/*body*/
+*{
+    margin:0;
+    font-family: 'Open Sans', sans-serif;
+    border:border-box;
+}
+/*global variables for colour palette*/
+:root{
+    --darkblue:#2B4560;
+    --beige:#E1E7E0;
+    --lightblue:#6AA4B0;
+    --teal:#2F6D80;
+}
+/* header styling */
+.header{
+    height:18vh;
+    width:100vw;
+    background-color:var(--beige) ;
+    color:black;
+    display:flex;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+}
+.language{
+    height:2em;
+    width:8em;
+    border-radius:0.5em;
+    color:var(--beige);
+    background-color: var(--teal);
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    border:none;
+}
+select{
+    background-color:var(--teal);
+    color:var(--beige);
+    border:none;
+}
+/* logo and registration styling */
+.navbar{
+    height:10vh;
+    width:100vw;
+    background-color: var(--teal);
+    color:var(--beige);
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+}
+.logo{
+    display: flex;
+}
+.logo img{
+    height:10vh;
+    width:15vw;
+}
+.login{
+    margin:10px;
+    width:13em;
+    color:var(--beige);
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+}
+.register{
+    height:2em;
+    width:8em;
+    border-radius:0.5em;
+    background-color: var(--beige);
+    color:var(--darkblue);
+    border:none;
+}
+/* navigation bar styling */
+.tags{
+    height:5vh;
+    width:100vw;
+    background-color: var(--darkblue);
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.tags a{
+    color:white;
+    text-decoration: none;
+}
+/* Hero section with background */
+.hero {
+    height: 80vh;
+    width: 100vw;
+    background-image: url("cyclone_homepg_bg.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Dark overlay for readability */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5); /* semi-transparent dark layer */
+    z-index: 1;
+}
+
+.overlay {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+/* Report Button */
+.report-btn {
+    margin-top: 20px;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: var(--teal);
+    color: var(--beige);
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.report-btn:hover {
+    background-color: var(--lightblue);
+    color: var(--beige);
+}
+@keyframes slider {
+    0% { background-image: url("cyclone_homepg_bg.jpg"); }
+    33% { background-image: url("fishermen_homepgbg.jpg"); }
+    66% { background-image: url("kidsonbeach_homepg.jpeg"); }
+    100% { background-image: url("vizhinjam-lighthouse_homepgbg.jpg"); }
+}
+
+.hero {
+    animation: slider 10s infinite ease-in-out;
+}
+
+
+/* About Us Section - Gradient Background */
+.about-section {
+  background: linear-gradient(to bottom, var(--lightblue), white);
+  color: var(--beige);
+  padding: 80px 5%;   /* reduce side padding to 5% for balance */
+  margin: 0 auto;     /* centers the section */
+  max-width: 13 00px;
+  /* padding: 100px 10%; */
+  border-radius: 20px;
+  /* margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 15px; */
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.about-header h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--beige);
+}
+
+.about-header span {
+  color: var(--teal);
+}
+
+.about-header p {
+  max-width: 800px;
+  margin: 0 auto 60px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--darkblue);
+}
+
+/* Features Section */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.feature-card {
+  background: var(--teal);
+  border: 1px solid var(--lightblue);
+  padding: 25px;
+  border-radius: 15px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  background: var(--darkblue);
+}
+
+.feature-card .icon {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: var(--beige);
+}
+
+.feature-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: var(--beige);
+}
+
+.feature-card p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--beige);
+}
+
+/* Mission Section */
+.mission {
+  background: var(--teal);
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  border: 2px solid var(--lightblue);
+}
+
+.mission h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: var(--beige);
+}
+
+.mission p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--beige);
+}
+
+/* .mission .highlight {
+  color: var(--lightblue)
+  font-weight: bold;
+} */
+
+
+
+/*footer style*/
+.footer {
+  background-color: var(--darkblue);
+  color: var(--beige);
+  padding: 40px 20px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer h2, .footer h3 {
+  color: var(--lightblue);
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;  /* aligns logo and text vertically */
+    gap: 12px;            /* space between logo and text block */
+}
+
+.footer-logo {
+    height: 45px;
+    width: auto;
+}
+
+.footer-title-container {
+    display: flex;
+    flex-direction: column;  /* stacks text vertically */
+}
+
+.footer-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--beige);
+    margin: 0;  /* removes default spacing */
+}
+
+.footer-tagline {
+    font-size: 0.9rem;
+    color: var(--lightblue);
+    margin: 2px 0 0 0; /* small space below title */
+}
+
+
+.footer-brand p {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: var(--beige);
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links ul li {
+  margin-bottom: 8px;
+}
+
+.footer-links ul li a {
+  text-decoration: none;
+  color: var(--beige);
+  transition: color 0.3s;
+}
+
+.footer-links ul li a:hover {
+  color: var(--lightblue);
+}
+
+.footer-contact p, 
+.footer-contact a {
+  font-size: 0.9rem;
+  color: var(--beige);
+  text-decoration: none;
+}
+
+.footer-contact a:hover {
+  color: var(--lightblue);
+}
+
+.social-icons a {
+  margin-right: 10px;
+  font-size: 1.2rem;
+  color: var(--beige);
+  transition: color 0.3s;
+}
+
+.social-icons a:hover {
+  color: var(--lightblue);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  font-size: 0.85rem;
+  color: var(--beige);
+  border-top: 1px solid var(--teal);
+  margin-top: 20px;
+}
+
+/* Quick Links Section */
+.quick-links {
+  background: var(--beige);
+  padding: 50px 5%;
+  text-align: center;
+}
+
+.quick-links h2 {
+  color: var(--darkblue);
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.link-card {
+  background: var(--teal);
+  color: var(--beige);
+  padding: 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.link-card i {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.link-card:hover {
+  transform: translateY(-5px);
+  background: var(--darkblue);
+}
+
+
+/* Notices + Weather */
+.notices-weather-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 60px 5%;
+  background: var(--beige);
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.notices-side {
+  flex: 1;
+  max-width: 600px;
+  background: var(--lightblue);
+  border: 2px solid var(--darkblue);
+  border-radius: 12px;
+  padding: 20px;
+}
+.weather-side {
+  flex: 1;
+  max-width: 400px;
+  background: var(--lightblue);
+  border: 2px solid var(--darkblue);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.weather-frame {
+  width: 100%;
+  max-width: 400px;
+  height: 250px;   /* tighter height, removes empty blue */
+  border: 1px solid var(--lightblue);
+  border-radius: 8px;
+}
+
+.notices-side h3, .weather-side h3 {
+  color: var(--darkblue);
+  margin-bottom: 15px;
+}
+
+.notice-marquee-vert {
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.notice-marquee-vert ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  animation: scrollUp 10s linear infinite;
+}
+
+.notice-marquee-vert li {
+  margin: 10px 0;
+}
+
+.notice-marquee-vert a {
+  text-decoration: none;
+  color: var(--beige);
+}
+
+@keyframes scrollUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}

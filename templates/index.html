@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="shortcut icon" href="{{ url_for('static', filename='shank.png') }}" type="image/x-icon">
+  <title>SIH</title>
+</head>
+<body>
+  <div class="header">
+    <div class="incois">
+      <img class="incois-logo" src="{{ url_for('static', filename='incois logo.svg') }}" alt="incois">
+    </div>
+    <div class="emblem">
+      <img src="{{ url_for('static', filename='emblem.svg') }}" alt="emblem">
+    </div>
+    <div class="sih">
+      <img src="{{ url_for('static', filename='sih25.png') }}" alt="sih25">
+    </div>
+    <div class="language">
+      <i class="fa-solid fa-language"></i>
+      <select>
+        <option value="opt1">English</option>
+        <option value="opt2">Hindi</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="navbar">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='Untitled design.png') }}" alt="SHANKH_logo">
+    </div>
+    <div class="login">
+      <div class="admin">ADMIN</div>
+      <i class="fa-solid fa-user"></i>
+      <!-- Flask route instead of signin.html -->
+      <button class="register" onclick="window.location.href='/signin'">Login / Sign-Up</button>
+    </div>
+  </div>
+
+  <div class="tags">
+    <a href="/">HOME</a>
+    <a href="#aboutus">ABOUT US</a>
+    <a href="/feed">FEED</a>
+    <a href="#">DASHBOARD</a>
+    <a href="#">HOTSPOT</a>
+    <a href="#">GUIDELINES</a>
+    <a href="#">HELPLINE</a>
+  </div>
+
+  <div class="hero">
+    <div class="overlay">
+      <h1>Report Hazards Instantly</h1>
+      <p>Your quick action can save lives and protect our oceans.</p>
+      <!-- Flask route for report page -->
+      <button class="report-btn" onclick="window.location.href='/report'">Report Now</button>
+    </div>
+  </div>
+
+  <!-- Quick Links Section -->
+  <section class="quick-links">
+    <h2>Quick Links</h2>
+    <div class="links-grid">
+      <a href="https://www.ndma.gov.in/" target="_blank" class="link-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>Disaster Management (NDMA)</span>
+      </a>
+      <a href="https://incois.gov.in/" target="_blank" class="link-card">
+        <i class="fa-solid fa-water"></i>
+        <span>Ocean Info (INCOIS)</span>
+      </a>
+      <a href="https://mausam.imd.gov.in/" target="_blank" class="link-card">
+        <i class="fa-solid fa-cloud-sun-rain"></i>
+        <span>IMD Weather Updates</span>
+      </a>
+      <a href="https://ndrf.gov.in/" target="_blank" class="link-card">
+        <i class="fa-solid fa-helmet-safety"></i>
+        <span>Relief Force (NDRF)</span>
+      </a>
+      <a href="https://mausam.imd.gov.in/imd_latest/contents/index_fisherman.php" target="_blank" class="link-card">
+        <i class="fa-solid fa-globe"></i>
+        <span>Fishermen Forecast (IMD)</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Notices + Weather Section -->
+  <section class="notices-weather-section">
+    <div class="notices-side">
+      <h3>Latest Notices</h3>
+      <div class="notice-marquee-vert">
+        <ul>
+          <li><a href="#">Cyclone Alert issued for East Coast (IMD)</a></li>
+          <li><a href="#">High tide warning in Kerala region</a></li>
+          <li><a href="#">INCOIS advisory: Fishermen avoid Bay of Bengal</a></li>
+          <li><a href="#">Orange alert for coastal Andhra Pradesh</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="weather-side">
+      <h3>Weather Forecast</h3>
+      <iframe id="weather-widget-frame"
+        src="https://www.meteoblue.com/en/weather/widget/daily/your_city_or_detect_code?geoloc=detect&tempunit=°C"
+        frameborder="0"
+        scrolling="yes"
+        class="weather-frame">
+      </iframe>
+    </div>
+  </section>
+
+  <section class="about-section">
+    <div class="about-header" id="aboutus">
+      <h2>About <span>Shankh</span></h2>
+      <p>
+        Shankh is an integrated platform designed to strengthen ocean hazard
+        reporting and response. We combine <strong>community participation, real-time data, 
+        and social media analytics</strong> to build a faster, more reliable coastal safety system. 
+        By empowering citizens and enabling collaboration with authorities, 
+        Shankh ensures timely action, better preparedness, and improved protection 
+        for India’s coastal communities.
+      </p>
+    </div>
+
+    <div class="features">
+      <div class="feature-card">
+        <h3>Instant Hazard Reporting</h3>
+        <p>
+          Citizens can quickly report incidents such as cyclones, flooding, 
+          unusual tides, and accidents with geo-tagged details and media uploads.
+        </p>
+      </div>
+      <div class="feature-card">
+        <h3>Real-Time Analytics</h3>
+        <p>
+          Reports are processed and analyzed alongside social media signals to 
+          identify credible threats and emerging patterns.
+        </p>
+      </div>
+      <div class="feature-card">
+        <h3>Accessible Communication</h3>
+        <p>
+          Multilingual support and an easy-to-use interface ensure inclusivity 
+          for coastal communities across India.
+        </p>
+      </div>
+      <div class="feature-card">
+        <h3>Decision Support</h3>
+        <p>
+          Verified hazard data helps officials and disaster management teams 
+          respond faster and make informed decisions to protect lives 
+          and livelihoods.
+        </p>
+      </div>
+    </div>
+
+    <div class="mission">
+      <h2>Our Mission</h2>
+      <p>
+        At Shankh, our mission is to create a 
+        <span class="highlight">community-powered coastal safety network</span> 
+        where every observation matters. We aim to turn citizen reports into 
+        actionable insights, helping disaster management teams respond quickly 
+        and effectively. By harnessing the 
+        <strong>power of collective intelligence and technology</strong>, 
+        we work to safeguard lives, livelihoods, and ecosystems along India’s 
+        vast coastline.
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="{{ url_for('static', filename='SHANKH_LOGO_darkbluebg.png') }}" height="200" width="200" alt="SHANKH_logo">
+        <div class="footer-title-container">
+          <h2 class="footer-title">Shankh</h2>
+          <p class="footer-tagline">Integrated Ocean Hazard Reporting Platform</p>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/report">Report Hazard</a></li>
+          <li><a href="#aboutus">About Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>Email: <a href="mailto:support@shankh.in">support@shankh.in</a></p>
+        <p>Phone: +91 XXXXX XXXXX</p>
+        <p>Location: Delhi, India</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Shankh. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
