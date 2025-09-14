@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- External CSS (optional) -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Segoe UI", Roboto, Arial, sans-serif; }
+    :root{
+      --darkblue:#2B4560;
+      --beige:#E1E7E0;
+      --lightblue:#6AA4B0;
+      --teal:#2F6D80;
+      --card-bg: #ffffff;
+    }
+    body { background: linear-gradient(180deg,#eef3f6 0%, #dbeaf0 100%); color: #123; padding-bottom:40px; }
+
+    .navbar{ background:var(--teal); color:var(--beige); text-align:center; padding:10px; font-weight:700; display:flex; justify-content:space-between; align-items:center;}
+    .tags{ background:var(--darkblue); display:flex; justify-content:space-evenly; align-items:center; padding:10px;}
+    .tags a{ color:#fff; text-decoration:none; font-weight:600; }
+
+    .container { max-width: 900px; margin: 1em auto; padding: 1em; }
+    .card { background: white; padding: 1.2em; margin-bottom: 1em; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    h2 { margin-top: 0; color: var(--teal); }
+    p { margin: 6px 0; }
+    button { padding: 0.6em 1em; margin-top: 0.5em; border: none; border-radius: 6px; cursor: pointer; background: #2f6d80; color: white; }
+    button:hover { background: #245563; }
+    #logoutBtn { background:#d9534f; margin-left:10px; }
+    #logoutBtn:hover { background:#b52b27; }
+    .weather-widget {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 12px;
+    }
+    .weatherwidget-io {
+      border-radius: 10px !important;
+      padding: 8px !important;
+      background: var(--lightblue) !important;
+      color: white !important;
+      font-weight: 600 !important;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <span>SHANKH — PROFILE</span>
+    <a href="{{ url_for('logout') }}"><button id="logoutBtn">Logout</button></a>
+  </div>
+
+  <div class="tags">
+    <a href="{{ url_for('signin') }}">HOME</a>
+    <a href="#">ABOUT US</a>
+    <a href="{{ url_for('feed') }}">FEED</a>
+    <a href="{{ url_for('profile') }}">DASHBOARD</a>
+    <a href="#">HOTSPOT</a>
+    <a href="{{ url_for('signin') }}">GUIDELINES</a>
+    <a href="#">HELPLINE</a>
+  </div>
+
+  <div class="container">
+    <!-- Personal Info -->
+    <div class="card">
+      <h2>Personal Details</h2>
+      {% if role == "user" %}
+        <p><b>ID:</b> {{ user[0] }}</p>
+        <p><b>Name:</b> {{ user[1] }}</p>
+        <p><b>Mobile:</b> {{ user[2] }}</p>
+        <p><b>Email:</b> {{ user[3] }}</p>
+        <p><b>Role:</b> Community User</p>
+      {% elif role == "admin" %}
+        <p><b>ID:</b> {{ user[0] }}</p>
+        <p><b>Name:</b> {{ user[1] }}</p>
+        <p><b>Mobile:</b> {{ user[2] }}</p>
+        <p><b>Email:</b> {{ user[3] }}</p>
+        <p><b>Employee ID:</b> {{ user[4] }}</p>
+        <p><b>Aadhaar:</b> {{ user[5] }}</p>
+        <p><b>Role:</b> INCOIS Admin</p>
+      {% else %}
+        <p>No user data available.</p>
+      {% endif %}
+    </div>
+
+    <!-- Duties -->
+    <div class="card">
+      <h2>Assigned Duties</h2>
+      {% if role == "admin" %}
+        <ul>
+          <li>Coordinate coastal evacuation drills</li>
+          <li>Monitor INCOIS and cyclone alerts</li>
+          <li>Report ground updates to State HQ</li>
+        </ul>
+      {% else %}
+        <ul>
+          <li>Stay updated with disaster alerts</li>
+          <li>Report emergencies through the portal</li>
+          <li>Assist local disaster response teams</li>
+        </ul>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Weather Widget -->
+  <div class="card">
+    <h2>🌤️ Live Weather</h2>
+    <div class="weather-icon" id="weatherIcon">—</div>
+    <p><b>Temperature:</b> <span id="temperature">—</span></p>
+    <p><b>Conditions:</b> <span id="conditions">—</span></p>
+    <p><b>Wind:</b> <span id="wind">—</span></p>
+    <p><b>Sun:</b> <span id="sun">—</span></p>
+    <button id="btn-refresh-weather">Refresh Weather</button>
+    <p><small>Forecast source: OpenWeatherMap</small></p>
+  </div>
+
+  <!-- JS -->
+  <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+  <script>
+    const OPENWEATHERMAP_API_KEY = "6039bafe73b74508d0b2aa21beb83b3e";
+    const WEATHER_UNITS = "metric";
+    let lastCoords = null;
+
+    const tempEl = document.getElementById("temperature");
+    const condEl = document.getElementById("conditions");
+    const windEl = document.getElementById("wind");
+    const sunEl = document.getElementById("sun");
+    const weatherIconEl = document.getElementById("weatherIcon");
+    const btnRefreshWeather = document.getElementById("btn-refresh-weather");
+
+    async function fetchWeather(lat, lon){
+      if (!OPENWEATHERMAP_API_KEY) return {error:"no_api_key"};
+      try {
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${WEATHER_UNITS}&appid=${OPENWEATHERMAP_API_KEY}`;
+        const res = await fetch(url);
+        if(!res.ok) throw new Error(res.status);
+        return await res.json();
+      } catch(e){ console.error(e); return {error:"fetch_error"}; }
+    }
+
+    function updateWeatherUI(d){
+      if(!d || d.error){
+        condEl.textContent = "Weather unavailable";
+        tempEl.textContent = "—";
+        windEl.textContent = "—";
+        sunEl.textContent = "—";
+        weatherIconEl.textContent = "—";
+        return;
+      }
+      tempEl.textContent = Math.round(d.main.temp) + " °C";
+      condEl.textContent = `${d.weather[0].description}, Humidity ${d.main.humidity}%`;
+      windEl.textContent = `Wind: ${d.wind.speed} m/s`;
+      const rise = new Date(d.sys.sunrise*1000).toLocaleTimeString();
+      const set = new Date(d.sys.sunset*1000).toLocaleTimeString();
+      sunEl.textContent = `Sun: ${rise} / ${set}`;
+      const id = d.weather[0].id;
+      weatherIconEl.textContent = id === 800 ? "☀️" : id > 800 ? "☁️" : id >= 600 ? "❄️" : id >= 300 ? "🌧️" : "⛈️";
+    }
+
+    async function getWeatherForCurrentLocation(){
+      if(!navigator.geolocation){ alert("No geolocation."); return; }
+      navigator.geolocation.getCurrentPosition(async pos => {
+        const {latitude:lat, longitude:lon} = pos.coords;
+        lastCoords = {lat, lon};
+        const weather = await fetchWeather(lat, lon);
+        updateWeatherUI(weather);
+      }, err => {
+        alert("Location denied. Try again or allow permissions.");
+      });
+    }
+
+    async function refreshWeatherNow(){
+      if(!lastCoords){ alert("Get location first."); return; }
+      const weather = await fetchWeather(lastCoords.lat, lastCoords.lon);
+      updateWeatherUI(weather);
+    }
+
+    // Initialize
+    getWeatherForCurrentLocation();
+    btnRefreshWeather.onclick = refreshWeatherNow;
+  </script>
+</body>
+</html>

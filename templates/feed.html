@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Community Feed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f7f9; margin: 0; }
+    .navbar{ background:#2F6D80; color:#fff; padding:12px; font-weight:bold; }
+    .container{ max-width:900px; margin:20px auto; padding:10px; }
+    .card{ background:white; padding:16px; margin-bottom:15px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+    .card h3{ margin:0; color:#2F6D80; }
+    .card small{ color:#666; }
+    img.media { max-width:100%; margin-top:8px; border-radius:8px; }
+  </style>
+</head>
+<body>
+  <div class="navbar">Community Reports</div>
+  <div class="container">
+    {% for r in reports %}
+      <div class="card">
+        <h3>{{ r[1] }} — {{ r[2] }}</h3>
+        <p>{{ r[3] }}</p>
+        <p><b>City:</b> {{ r[4] }} ({{ r[5] }}, {{ r[6] }})</p>
+        <small>Posted by {{ r[9] }} at {{ r[7] }}</small>
+        {% if r[8] %}
+          <img src="{{ r[8] }}" alt="Report media" class="media">
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

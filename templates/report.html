@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Submit Report</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial, sans-serif; background:#eef3f6; margin:0; padding:20px; }
+    form{ background:#fff; max-width:600px; margin:20px auto; padding:20px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+    label{ display:block; margin-top:10px; font-weight:bold; }
+    input, textarea, select { width:100%; padding:8px; margin-top:5px; border:1px solid #ccc; border-radius:6px; }
+    button{ margin-top:15px; padding:10px; border:none; border-radius:6px; background:#2F6D80; color:white; font-weight:bold; cursor:pointer; }
+    button:hover{ background:#245563; }
+  </style>
+</head>
+<body>
+  <h2 style="text-align:center;color:#2F6D80;">Submit a Hazard Report</h2>
+  <form method="POST" enctype="multipart/form-data">
+    <label>Hazard Type</label>
+    <input type="text" name="hazard_type" required>
+    <label>Name</label>
+    <input type="text" name="name" required>
+    <label>Description</label>
+    <textarea name="description" required></textarea>
+    <label>City</label>
+    <input type="text" name="city" required>
+    <label>Latitude</label>
+    <input type="text" name="latitude">
+    <label>Longitude</label>
+    <input type="text" name="longitude">
+    <label>Upload Media</label>
+    <input type="file" name="media" accept="image/*,video/*">
+    <button type="submit">Submit Report</button>
+  </form>
+</body>
+</html>
