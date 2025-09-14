@@ -1,9 +1,9 @@
-import sqlite3 
+import sqlite3
 from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory
 from datetime import datetime
 import os
 
-app = Flask(__name__, template_folder="templates")
+app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = "supersecretkey"
 
 # ------------------ Upload Config ------------------
@@ -63,8 +63,13 @@ def init_db():
 
 init_db()
 
+# ------------------ Home ------------------
+@app.route("/")
+def home():
+    return render_template("index.html")
+
 # ------------------ Signin/Register ------------------
-@app.route("/", methods=["GET", "POST"])
+@app.route("/signin", methods=["GET", "POST"])
 def signin():
     if request.method == "POST":
         action = request.form.get("action")
@@ -161,7 +166,7 @@ def logout():
     session.pop("role", None)
     return redirect(url_for("signin"))
 
-# ------------------ Submit Report ------------------
+# ------------------ Report ------------------
 @app.route("/report", methods=["GET", "POST"])
 def report():
     if request.method == "POST":
@@ -197,6 +202,7 @@ def report():
 
         return redirect(url_for("feed"))
 
+    # GET request -> show report form
     return render_template("report.html")
 
 # ------------------ Feed ------------------
