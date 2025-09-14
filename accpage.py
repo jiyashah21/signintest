@@ -2,13 +2,19 @@ import sqlite3
 from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory
 from datetime import datetime
 import os
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = "supersecretkey"
 
 # ------------------ Upload Config ------------------
-app.config['UPLOAD_FOLDER'] = 'uploads'
+app.config['UPLOAD_FOLDER'] = os.path.join("static", "uploads")
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif", "mp4", "avi"}
+
+def allowed_file(filename):
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # ------------------ Database Setup ------------------
 def init_db():
@@ -41,7 +47,7 @@ def init_db():
         )
     """)
 
-    # Reports table
+    # Reports table with verification status
     cur.execute("""
         CREATE TABLE IF NOT EXISTS reports (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -54,6 +60,7 @@ def init_db():
             longitude TEXT,
             media_path TEXT,
             timestamp TEXT,
+            verified TEXT DEFAULT 'unverified',
             FOREIGN KEY(user_id) REFERENCES users(id)
         )
     """)
@@ -183,10 +190,10 @@ def report():
 
         media_file = request.files.get("media")
         media_path = None
-        if media_file:
-            filename = f"{int(datetime.now().timestamp())}_{media_file.filename}"
+        if media_file and allowed_file(media_file.filename):
+            filename = secure_filename(f"{int(datetime.now().timestamp())}_{media_file.filename}")
             media_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            media_path = f"/uploads/{filename}"
+            media_path = f"/static/uploads/{filename}"
 
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -214,7 +221,8 @@ def feed():
     conn = sqlite3.connect("users.db")
     cur = conn.cursor()
     cur.execute("""
-        SELECT r.id, r.hazard_type, r.name, r.description, r.city, r.latitude, r.longitude, r.timestamp, r.media_path, u.name
+        SELECT r.id, r.hazard_type, r.name, r.description, r.city, r.latitude, r.longitude, 
+               r.timestamp, r.media_path, r.verified, u.name
         FROM reports r
         JOIN users u ON r.user_id = u.id
         ORDER BY r.timestamp DESC
@@ -224,7 +232,7 @@ def feed():
     return render_template("feed.html", reports=reports, current_user=session.get("user_id"))
 
 # ------------------ Serve Uploaded Media ------------------
-@app.route("/uploads/<filename>")
+@app.route("/static/uploads/<filename>")
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 

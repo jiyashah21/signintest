@@ -1,0 +1,160 @@
+:root {
+  --darkblue: #2B4560;
+  --beige: #E1E7E0;
+  --lightblue: #6AA4B0;
+  --teal: #2F6D80;
+}
+
+/* Page background roughly matches screenshot */
+body {
+  background: #f7f6f4;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #222;
+}
+
+.header{
+    height:18vh;
+    width:100vw;
+    background-color:var(--beige) ;
+    color:black;
+    display:flex;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+}
+.language{
+    height:2em;
+    width:8em;
+    border-radius:0.5em;
+    color:var(--beige);
+    background-color: var(--teal);
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    border:none;
+}
+select{
+    background-color:var(--teal);
+    color:var(--beige);
+    border:none;
+}
+/* logo and registration styling */
+.navbar{
+    height:10vh;width:100vw;background-color: var(--teal);color:var(--beige);display:flex;justify-content:space-between;align-items: center;padding: 0 15px;;
+}
+.logo{display: flex;}
+.login{margin:10px;width:13em;color:var(--beige);display:flex;justify-content:space-between;align-items: center;
+}
+.register{ height:2em;width:8em;border-radius:0.5em;background-color: var(--beige);color:var(--darkblue);border:none;
+}
+/* navigation bar styling */
+.tags{height:5vh; width:100vw; background-color: var(--darkblue); display:flex;justify-content: space-evenly; align-items: center;
+}
+.tags a{color:white;text-decoration: none;
+}
+.logo img{
+   height: 81px; 
+    width: auto; 
+    max-width: 200%; 
+    object-fit: contain; 
+}
+/* Card styling to match screenshot look */
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--darkblue);
+  border-color: var(--darkblue);
+}
+.btn-primary:hover {
+  background: var(--teal);
+  border-color: var(--teal);
+}
+
+/* File drop area style */
+.border.rounded.p-4 {
+  background: #fff;
+}
+
+/* Form labels look */
+.form-label {
+  color: #333;
+}
+
+/* Small responsive tweaks */
+@media (max-width: 576px) {
+  .card-body { padding: 20px; }
+}
+
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="file"],
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--teal);
+  border-radius: 8px;
+  outline: none;
+  font-size: 15px;
+  background: #fff;
+  color: #000;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  padding: 10px 15px;
+}
+
+#getLocation {
+  background: var(--teal);
+  color: #fff;
+  margin-top: 8px;
+  transition: background 0.3s;
+}
+
+#getLocation:hover {
+  background: var(--darkblue);
+}
+
+.submit-btn {
+  background: var(--darkblue);
+  color: #fff;
+  width: 100%;
+  font-size: 16px;
+  padding: 14px;
+  margin-top: 10px;
+  transition: background 0.3s ease-in-out;
+}
+
+.submit-btn:hover {
+  background: var(--teal);
+}
+
+.back-home {
+  align-self: flex-start;
+  margin-left: 20px;
+  text-decoration: none;
+  font-size: 16px;
+  color: var(--darkblue);
+  font-weight: bold;
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.back-home:hover {
+  background: var(--teal);
+  color: #fff;
+}
